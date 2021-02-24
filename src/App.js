@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import client from "./client";
 import { ApolloProvider } from "react-apollo";
 import { Query } from "react-apollo";
-import { ME } from "./graphql";
 import { SEARCH_REPOSITORIES } from "./graphql";
 
 const DEFAULT_STATE = {
@@ -34,7 +33,6 @@ class App extends Component {
 
   render() {
     const { query, first, last, before, after } = this.state;
-    console.log({ query });
     return (
       <ApolloProvider client={client}>
         <form onSubmit={this.handleSubmit}>
@@ -53,7 +51,27 @@ class App extends Component {
             const repositoryUnit =
               repositoryCount === 1 ? "Repository" : "Repositories";
             const title = `Githubのリポジトリー検索結果一覧 - ${repositoryCount} ${repositoryUnit}`;
-            return <h2>{title}</h2>;
+            return (
+              <React.Fragment>
+                <h2>{title}</h2>
+                <ul>
+                  {search.edges.map((edge) => {
+                    const node = edge.node;
+                    return (
+                      <li key={node.id}>
+                        <a
+                          href={node.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          {node.name}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </React.Fragment>
+            );
           }}
         </Query>
       </ApolloProvider>
