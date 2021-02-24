@@ -18,6 +18,18 @@ class App extends Component {
     super(props);
     this.state = VARIABLES;
   }
+
+  handleChange(event) {
+    this.setState({
+      ...DEFAULT_STATE,
+      query: event.target.value,
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+
   render() {
     const { query, first, last, before, after } = this.state;
     return (
