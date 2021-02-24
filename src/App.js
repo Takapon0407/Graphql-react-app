@@ -61,7 +61,9 @@ class App extends Component {
                     const node = edge.node;
                     return (
                       <li key={node.id}>
-                        <a href={node.url}> {node.name}</a>
+                        <a href={node.url} target="_blank">
+                          {node.name}
+                        </a>
                       </li>
                     );
                   })}
