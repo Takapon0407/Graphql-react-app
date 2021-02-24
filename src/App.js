@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import client from "./client";
 import { ApolloProvider } from "react-apollo";
 import { Query } from "react-apollo";
-import { ME } from "./graphql";
 import { SEARCH_REPOSITORIES } from "./graphql";
 
 const DEFAULT_STATE = {
