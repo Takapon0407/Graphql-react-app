@@ -4,6 +4,7 @@ import { ApolloProvider } from "react-apollo";
 import { Query } from "react-apollo";
 import { SEARCH_REPOSITORIES } from "./graphql";
 
+const PER_PAGE = 5;
 const DEFAULT_STATE = {
   first: 5,
   after: null,
@@ -29,6 +30,15 @@ class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+  }
+
+  goNext(search) {
+    this.setState({
+      first: PER_PAGE,
+      after: search.pageInfo.endCursor,
+      last: null,
+      before: null,
+    });
   }
 
   render() {
@@ -70,6 +80,10 @@ class App extends Component {
                     );
                   })}
                 </ul>
+
+                {search.pageInfo.hasNextPage === true ? (
+                  <button onClick={this.goNext.bind(this, search)}>Next</button>
+                ) : null}
               </React.Fragment>
             );
           }}
