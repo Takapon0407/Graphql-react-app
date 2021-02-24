@@ -47,9 +47,13 @@ class App extends Component {
           {({ loading, error, data }) => {
             if (loading) return "Loading...";
             if (error) return `Error! ${error.message}`;
-            console.log({ data });
 
-            return <div></div>;
+            const search = data.search;
+            const repositoryCount = search.repositoryCount;
+            const repositoryUnit =
+              repositoryCount === 1 ? "Repository" : "Repositories";
+            const title = `Githubのリポジトリー検索結果一覧 - ${repositoryCount} ${repositoryUnit}`;
+            return <h2>{title}</h2>;
           }}
         </Query>
       </ApolloProvider>
