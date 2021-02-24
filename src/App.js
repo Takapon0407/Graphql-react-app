@@ -34,7 +34,6 @@ class App extends Component {
 
   render() {
     const { query, first, last, before, after } = this.state;
-    console.log({ query });
     return (
       <ApolloProvider client={client}>
         <form onSubmit={this.handleSubmit}>
