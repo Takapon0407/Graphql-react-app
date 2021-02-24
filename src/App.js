@@ -53,7 +53,22 @@ class App extends Component {
             const repositoryUnit =
               repositoryCount === 1 ? "Repository" : "Repositories";
             const title = `Githubのリポジトリー検索結果一覧 - ${repositoryCount} ${repositoryUnit}`;
-            return <h2>{title}</h2>;
+            return (
+              <React.Fragment>
+                <h2>{title}</h2>
+                <ul>
+                  {search.edges.map((edge) => {
+                    const node = edge.node;
+
+                    return (
+                      <li>
+                        <a href={node.url}> {node.name}</a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </React.Fragment>
+            );
           }}
         </Query>
       </ApolloProvider>
