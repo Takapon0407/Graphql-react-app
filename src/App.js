@@ -26,12 +26,14 @@ const StarButton = (props) => {
   return (
     <Mutation
       mutation={viewerHasStarred ? REMOVE_STAR : ADD_STAR}
-      refetchQueries={[
-        {
-          query: SEARCH_REPOSITORIES,
-          variables: { query, first, last, before, after },
-        },
-      ]}
+      refetchQueries={(mutationResult) => {
+        return [
+          {
+            query: SEARCH_REPOSITORIES,
+            variables: { query, first, last, before, after },
+          },
+        ];
+      }}
     >
       {(addOrRemoveStar) => <StarStatus addOrRemoveStar={addOrRemoveStar} />}
     </Mutation>
